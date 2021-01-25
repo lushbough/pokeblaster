@@ -57,6 +57,6 @@
   "dependencies": {
     "@babel/polyfill": "^7.10.4",
     "phaser": "^3.24.1",
-    "phaser3-weapon-plugin": "^2.0.1"
+    "phaser3-weapon-plugin": "^2.1.0"
   }
 }

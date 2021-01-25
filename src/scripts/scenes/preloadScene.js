@@ -1,18 +1,5 @@
-// import {WeaponPlugin}  from 'phaser3-weapon-plugin'
+import { WeaponPlugin } from 'phaser3-weapon-plugin'
 
-
-import { WeaponPlugin } from '../../node_modules/phaser3-weapon-plugin/dist/WeaponPlugin.js'
-let directions = {
-  '-180': 'w',
-  '-135': 'nw',
-  '-90': 'n',
-  '-45': 'ne',
-  '0': 'e',
-  '45': 'se',
-  '90': 's',
-  '135': 'sw',
-  '180': 'w'
-};
 
 export default class PreloadScene extends Phaser.Scene {
   constructor() {
@@ -31,12 +18,8 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.spritesheet('ash',
       'assets/img/ash.png',
       { frameWidth: 16, frameHeight: 24 })
-     // this.load.script('WeaponPlugin', '../node_modules/phaser3-weapon-plugin/dist/WeaponPlugin.js', 'weaponPlugin', 'weapons');
 
-    // this.load.scenePlugin('WeaponPlugin', WeaponPlugin.WeaponPlugin, 'weapons')
-    // function preload () {
-    //   // Load the script
-    // }
+
   }
 
   create() {
