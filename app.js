@@ -1,28 +1,28 @@
-const express = require('express')
+// const express = require('express')
 
-const app = express();
-let serv = require('http').Server(app);
+// const app = express();
+// let serv = require('http').Server(app);
 
-app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/src/index.html');
-});
-app.use('/src', express.static(__dirname + '/src'));
+// app.get('/', function(req, res) {
+//     res.sendFile(__dirname + '/src/index.html');
+// });
+// app.use('/src', express.static(__dirname + '/src'));
 
-serv.listen(2000);
+// serv.listen(2000);
 
-console.log('server started');
+// console.log('server started');
 
-let io = require('socket.io')(serv, {});
-io.sockets.on('connection', function(socket) {
-    console.log('socket connection')
-
-
-    socket.on('happy', function() {
-        console.log('happy');
-    });
+// let io = require('socket.io')(serv, {});
+// io.sockets.on('connection', function(socket) {
+//     console.log('socket connection')
 
 
-});
+//     socket.on('happy', function() {
+//         console.log('happy');
+//     });
+
+
+// });
 
 
 // require('dotenv').config();

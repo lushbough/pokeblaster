@@ -11,13 +11,16 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image('tiles', 'assets/img/tileset-main.png');
     this.load.image('bushes', 'assets/img/bushes.png');
     this.load.image('pistol', 'assets/img/pistol.png');
-    this.load.image('bullet', 'assets/img/bulletSM.png');
+    this.load.image('bullet', 'assets/img/fireBullet.png');
     this.load.image('aim', 'assets/img/aim.png');
     this.load.tilemapTiledJSON('map', "assets/maps/mainMap.json")
 
     this.load.spritesheet('ash',
       'assets/img/ash.png',
       { frameWidth: 16, frameHeight: 24 })
+
+
+      this.load.audio('shoot', 'assets/audio/shoot.mp3')
 
 
   }

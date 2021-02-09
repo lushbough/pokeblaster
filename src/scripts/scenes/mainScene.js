@@ -1,10 +1,7 @@
-import preloadScene from './preloadScene'
-import { Scene } from 'phaser'
 
 import Phaser from 'phaser'
-import { WeaponPlugin, consts } from 'phaser3-weapon-plugin'
 
-let pistol;
+let bulletSound;
 
 export default class MainScene extends Phaser.Scene {
 
@@ -12,30 +9,20 @@ export default class MainScene extends Phaser.Scene {
   constructor() {
     super({ key: 'MainScene' })
   }
-  // preload ()
-  // {
-  //   // Install it into a scene
-  //   this.plugins.installScenePlugin(
-  //     'WeaponPlugin',
-  //     WeaponPlugin,
-  //     'weapons',
-  //     this
-  //   );
-  // }
 
 
 
   create() {
 
-    this.socket = io();
+    // this.socket = io();
  
 
 
     this.map = this.make.tilemap({key: 'map'})
 
     this.tileset = this.map.addTilesetImage('tileset-main', 'tiles')
-    this.belowLayer = this.map.createStaticLayer('bottom', this.tileset, 0, 0)
-    this.worldLayer = this.map.createStaticLayer('top', this.tileset, 0, 0)
+    this.belowLayer = this.map.createDynamicLayer('bottom', this.tileset, 0, 0)
+    this.worldLayer = this.map.createDynamicLayer('top', this.tileset, 0, 0)
     // this.objectsLayer = this.map.createStaticLayer('objects', this.tileset, 0, 0)
 
     this.player = this.physics.add.sprite(16, 95 * 16, 'ash', 6);
@@ -48,6 +35,10 @@ export default class MainScene extends Phaser.Scene {
 
     this.bullet = this.physics.add.sprite(this.gun.x, this.gun.y, 'bullet')
     this.bullet.setCollideWorldBounds(true)
+    this.bullet.setScale(.5)
+
+
+    bulletSound = this.sound.add('shoot')
 
 
 
@@ -60,8 +51,12 @@ export default class MainScene extends Phaser.Scene {
     this.physics.world.bounds.width = this.map.widthInPixels
     this.physics.world.bounds.height = this.map.heightInPixels
     this.physics.add.collider(this.player, this.worldLayer)
-    this.physics.add.collider(this.bullet, this.worldLayer, (bullet, layer) => {
-      bullet.disableBody(true, true)
+
+
+    this.physics.add.overlap(this.bullet, this.worldLayer, (bullet, worldLayer) => {
+      
+      this.worldLayer.removeTileAtWorldXY(this.bullet.x, this.bullet.y, this.cameras.main)
+      console.log("layer bullet collision at " + this.bullet.x+ " " + this.bullet.y )
     });
 
 
@@ -99,9 +94,11 @@ export default class MainScene extends Phaser.Scene {
       this.gun.rotation = this.angle
 
       this.input.on('pointerup', function () {
+
+        bulletSound.play();
         // this.weapon.fireAtXY(cursor.x + this.cameras.main.scrollX, cursor.y + this.cameras.main.scrollY)
         this.bullet.enableBody(true, this.gun.x, this.gun.y, true, true);
-        this.physics.velocityFromRotation(this.angle, 600, this.bullet.body.velocity);
+        this.physics.velocityFromRotation(this.angle, 400, this.bullet.body.velocity);
       }, this);
     }, this);
 
@@ -147,6 +144,7 @@ export default class MainScene extends Phaser.Scene {
     // this.gun.body.rotation = Phaser.Math.Angle.BetweenPoints(this.gun, this.input.activePointer)
     // this.gun.rotation = this.physics.a.angleToPointer(this.gun)
     // this.gun.setOffset(10, 10)
+    this.bullet.update
 
 
 
