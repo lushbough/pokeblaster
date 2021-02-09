@@ -36,7 +36,7 @@
       }
     </style>
 
-    <noscript>Please enable javascript to continue using this application.</noscript>
+    <!-- <noscript>Please enable javascript to continue using this application.</noscript> -->
 
     <!-- installs the serviceWorker -->
     <!-- <script>
@@ -46,6 +46,13 @@
         })
       }
     </script> -->
+    <script src="https://cdn.socket.io/3.1.1/socket.io.min.js"></script>
+    <script>
+      let socket = io();
+
+      socket.emit('happy')
+    </script>
+
   </head>
   <body>
     <div id="phaser-game"></div>

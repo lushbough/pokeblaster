@@ -1,4 +1,4 @@
-import { WeaponPlugin } from 'phaser3-weapon-plugin'
+// import { WeaponPlugin } from 'phaser3-weapon-plugin'
 
 
 export default class PreloadScene extends Phaser.Scene {
@@ -11,7 +11,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image('tiles', 'assets/img/tileset-main.png');
     this.load.image('bushes', 'assets/img/bushes.png');
     this.load.image('pistol', 'assets/img/pistol.png');
-    this.load.image('bullet', 'assets/img/bullet.png');
+    this.load.image('bullet', 'assets/img/bulletSM.png');
     this.load.image('aim', 'assets/img/aim.png');
     this.load.tilemapTiledJSON('map', "assets/maps/mainMap.json")
 
