@@ -3,7 +3,12 @@
   <br> by William Lushbough
   <br> I created this project to work on my Javascript skills and get familar with the Phaser Framework. I've accomplished completing a distributing a basic web game.
   <br>This is a temporary demo of a 2D game called PokeBlaser. Currently working on implementing multiplayer with Node.js and socket.io.
+
+play the game online here:
+https://lushbough.github.io/runGame/
+
 </h1>
+<h3 align="center">Use the arrow keys to walk and the mouse cursor to shoot up the pokemon-style world.</h3>
 
 <h3 align="center">Below is the ReadMe for the Phaser-project-template I used.</h3>
 
