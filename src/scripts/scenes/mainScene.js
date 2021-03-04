@@ -1,4 +1,3 @@
-
 import Phaser from 'phaser'
 
 let bulletSound;
@@ -9,14 +8,11 @@ export default class MainScene extends Phaser.Scene {
     super({ key: 'MainScene' })
   }
 
-
   create() {
-
     // this.socket = io();
- 
     this.map = this.make.tilemap({key: 'map'})
 
-    this.tileset = this.map.addTilesetImage('tileset-main', 'tiles')
+    this.tileset = this.map.addTilesetImage('tilesethope', 'tiles')
     this.belowLayer = this.map.createDynamicLayer('bottom', this.tileset, 0, 0)
     this.worldLayer = this.map.createDynamicLayer('top', this.tileset, 0, 0)
 
@@ -33,6 +29,10 @@ export default class MainScene extends Phaser.Scene {
     this.bullet.setScale(.5)
 
     bulletSound = this.sound.add('shoot')
+    bulletSound.setVolume(.4)
+    this.bg = this.sound.add('bg')
+    this.bg.setLoop(true);
+    this.bg.play();
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -45,10 +45,10 @@ export default class MainScene extends Phaser.Scene {
     this.physics.add.collider(this.player, this.worldLayer)
 
     this.physics.add.overlap(this.bullet, this.worldLayer, (bullet, worldLayer) => {
-      
       this.worldLayer.removeTileAtWorldXY(this.bullet.x, this.bullet.y, this.cameras.main)
       console.log("layer bullet collision at " + this.bullet.x+ " " + this.bullet.y )
     });
+
     this.input.setDefaultCursor('url(assets/img/aim.png), pointer')
 
     this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels)
@@ -70,9 +70,6 @@ export default class MainScene extends Phaser.Scene {
         this.physics.velocityFromRotation(this.angle, 400, this.bullet.body.velocity);
       }, this);
     }, this);
-
-
-
 
     this.anims.create({
       key: 'left',
@@ -102,15 +99,12 @@ export default class MainScene extends Phaser.Scene {
 
   } //END CREATE METHOD
 
-
   update(time, delta) {
 
     this.gun.setPosition(this.player.x + 10, this.player.y + 10)
-    this.bullet.update
 
     this.player.body.setVelocity(0);
-    const speed = 200;
-
+    const speed = 200
 
     if (this.cursors.left.isDown)
     {
@@ -141,13 +135,10 @@ export default class MainScene extends Phaser.Scene {
       this.player.anims.play('down', true);
       this.player.body.setVelocityY(speed);
       this.player.body.angle = 270
-
     }
     else
     {
       this.player.anims.stop();
     }
-
   } //end of update method
-
 }
